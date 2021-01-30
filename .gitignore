@@ -1,0 +1,12 @@
+.env
+\database.db
+\dbProducts.db
+\caeonline_2.csv
+\node_modules
+\public\img
+*.jpg
+*.json
+\public\posted
+*.db
+*.docx
+\public\oldfiles
