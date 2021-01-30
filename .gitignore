@@ -9,4 +9,5 @@
 \public\posted
 *.db
 *.docx
+*.csv
 \public\oldfiles
