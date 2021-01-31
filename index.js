@@ -218,48 +218,7 @@ app.post('/ebaysearch', (request, res) => {
 });
 
 
-/* //Multer DiskStorage Config
-const diskStorage = multer.diskStorage({
-    destination: './public/uploads',
-    filename: (req, file, call_back) => {
-        const m = Date.now();
-        call_back(null, m + '_' + file.originalname);
-    }
-});
-//Create Multer Instance
-const upload = multer({
-    storage: diskStorage,
-    //fileFilter: function(req, file, cb) {
-    //checkFileType(file, cb);} 
-}).array("myImage", 10);
-
-// Check File Type
-/* function checkFileType(file, cb) {
-    // Allowed ext
-    const filetypes = /jpeg|jpg|png|gif/;
-    // Check ext
-    const extname = filetypes.test(path.extname(file.originalname).toLowerCase());
-    // Check mime
-    const mimetype = filetypes.test(file.mimetype);
-
-    if (mimetype && extname) {
-        return cb(null, true);
-    } else {
-        cb('Error: Images Only!');
-    }
-} */
-
-//File upload old
-//Upload route
-//app.post('/newupload', upload.single('image'), (req, res, next) => {
-
-/* app.post('/upload', upload, (req, res) => {
-    console.log("res.json is: ", req.file);
-    res.json(req.file);
-    //res.redirect("verify.html");
-}); */
-// END MULTER PCKG UPLOAD */
-
+/* 
 // Set The Storage Engine
 const storage = multer.diskStorage({
     destination: './public/uploads/',
@@ -293,7 +252,7 @@ function checkFileType(file, cb) {
     }
 }
 
-
+ */
 
 // Send uploaded file names to client
 /* app.get('/filename', (req, resp) => {
