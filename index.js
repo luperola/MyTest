@@ -10,13 +10,13 @@ const multer = require('multer');
 var ncp = require('ncp').ncp;
 ncp.limit = 0;
 const path = require("path");
-const ejs = require('ejs');
 
 const port = process.env.PORT || 3000;
 app.listen(port, () => { console.log(`listening server at ${port}`); });
-app.use(express.static('public'));
+//app.use(express.static('public'));
+app.use(express.static(__dirname + '/public'));
 app.use(express.json({ limit: "10mb" }));
-app.use('/', express.static(__dirname + 'Images'));
+//app.use('/', express.static(__dirname + 'Images'));
 const database = new Datastore('database.db');
 database.loadDatabase();
 
@@ -217,29 +217,41 @@ app.post('/ebaysearch', (request, res) => {
     };
 });
 
-
-/* 
 // Set The Storage Engine
 const storage = multer.diskStorage({
     destination: './public/uploads/',
     filename: function(req, file, cb) {
-        cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname));
+        var a = new Date();
+        var b = new Date();
+        var c = new Date();
+        var d = new Date();
+        var e = new Date();
+        var f = new Date();
+        a = a.getMonth();
+        b = b.getDay();
+        c = c.getHours();
+        d = d.getMinutes();
+        e = e.getSeconds();
+        f = f.getMilliseconds()
+        var dataDelFile = "M" + a + "D" + b + "H" + c + "MN" + d + "S" + e + "MS" + f
+        cb(null, file.fieldname + '-' + dataDelFile + path.extname(file.originalname));
+        //Date.now()
     }
 });
 
 // Init Upload
 const upload = multer({
     storage: storage,
-    limits: { fileSize: 1000000 },
-    fileFilter: function(req, file, cb) {
+    limits: { fileSize: 10000000 },
+    /* fileFilter: function(req, file, cb) {
         checkFileType(file, cb);
-    }
+    } */
 }).single('myImage');
 
-// Check File Type
-function checkFileType(file, cb) {
+// Check File Type 
+/* function checkFileType(file, cb) {
     // Allowed ext
-    const filetypes = /jpeg|jpg|png|gif/;
+    const filetypes = /jpeg|jpg|png|gif|pdf/;
     // Check ext
     const extname = filetypes.test(path.extname(file.originalname).toLowerCase());
     // Check mime
@@ -250,22 +262,40 @@ function checkFileType(file, cb) {
     } else {
         cb('Error: Images Only!');
     }
-}
+} */
+app.post('/upload', (req, res) => {
+    upload(req, res, (err) => {
+        if (err) {
+            /* res.render('index', {
+              msg: err
+            }); */
+            console.log(err);
 
- */
-
+        } else {
+            if (req.file == undefined) {
+                /* res.render('index', {
+                  msg: 'Error: No File Selected!'
+                }); */
+                res.redirect("index.html");
+            } else {
+                //console.log("file =", req.file);
+                //res.send(req.file);
+                res.redirect("index.html");
+                res.end();
+                return
+            }
+        }
+    });
+});
 // Send uploaded file names to client
-/* app.get('/filename', (req, resp) => {
+app.get('/filename', (req, resp) => {
     const testFolder = './public/uploads';
     fs.readdir(testFolder, (err, files) => {
         files.forEach(file => {});
+        console.log("files=", files);
         resp.json(files);
     });
-}); */
-
-
-// end
-
+});
 // post for publishing the on sale and make its website
 app.post('/verify', (request, response) => {
     const data_verify = request.body;

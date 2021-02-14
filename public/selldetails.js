@@ -1,26 +1,74 @@
 function verify() {
-    document.getElementById('filename').disabled = false;
+    /* document.getElementById('filename').disabled = false;
     document.getElementById('upload').disabled = false;
-    document.getElementById('submit').disabled = false;
+    document.getElementById('submit').disabled = false; */
     let page = [];
     const verifyName = document.getElementById("first_name").value;
     const verifyLastName = document.getElementById("last_name").value;
+    const verifyEmail = document.getElementById("email").value;
     const verifyCompany = document.getElementById("company").value;
     const verifyRole = document.getElementById("role").value;
-    const verifyEmail = document.getElementById("email").value;
     const verifyOEM = document.getElementById("oem").value;
     const verifyModel = document.getElementById("model").value;
-    const verifySN = document.getElementById("sn").value;
-    const verifyVintage = document.getElementById("vintage").value;
-    const verifySize = document.getElementById("size").value;
-    const verifyConditions = document.getElementById("conditions").value;
-    const verifyAvailability = document.getElementById("availability").value;
     const verifyDetails = document.getElementById("details").value;
-    const verifyUpload = document.getElementById("upload").value;
-    page.push(verifyName, verifyLastName, verifyCompany, verifyRole, verifyEmail, verifyOEM, verifyModel,
-        verifySN, verifyVintage, verifySize, verifyConditions, verifyAvailability, verifyDetails, verifyUpload)
+    const verifyPrice = document.getElementById("price").value;
+    const verifyLocation = document.getElementById("location").value;
+    const verifySize = document.getElementById("size").value;
+    const verifyVintage = document.getElementById("vintage").value;
+    const verifySN = document.getElementById("sn").value;
+    const verifyCondition = document.getElementById("condition").value;
+    //const verifyUpload = document.getElementById("upload").value;
+    page.push(verifyName, verifyLastName, verifyEmail, verifyCompany, verifyRole, verifyOEM, verifyModel,
+        verifyDetails, verifyPrice, verifyLocation, verifySize, verifyVintage, verifySN, verifyCondition)
 
-    getFile();
+    for (let index = 0; index < page.length; index++) {
+        const element = page[index];
+        console.log("list", index, " ", page[index]);
+    };
+
+    Catch();
+    async function Catch() {
+        const prendifile = await fetch('/filename');
+        var vabene = await prendifile.json();
+        console.log("response", vabene);
+        if (vabene.length === 1) {
+            document.getElementById('image').src = '/uploads/' + vabene[0];
+        };
+        if (vabene.length === 2) {
+            document.getElementById('image').src = '/uploads/' + vabene[0];
+            document.getElementById('image1').src = '/uploads/' + vabene[1];
+        };
+
+        if (vabene.length === 3) {
+            document.getElementById('image').src = '/uploads/' + vabene[0];
+            document.getElementById('image1').src = '/uploads/' + vabene[1];
+            document.getElementById('image2').src = '/uploads/' + vabene[2];
+        };
+        if (vabene.length === 4) {
+            document.getElementById('image').src = '/uploads/' + vabene[0];
+            document.getElementById('image1').src = '/uploads/' + vabene[1];
+            document.getElementById('image2').src = '/uploads/' + vabene[2];
+            document.getElementById('image3').src = '/uploads/' + vabene[3];
+        };
+        if (vabene.length === 5) {
+            document.getElementById('image').src = '/uploads/' + vabene[0];
+            document.getElementById('image1').src = '/uploads/' + vabene[1];
+            document.getElementById('image2').src = '/uploads/' + vabene[2];
+            document.getElementById('image3').src = '/uploads/' + vabene[3];
+            document.getElementById('image4').src = '/uploads/' + vabene[4];
+        };
+        if (vabene.length > 5) {
+            document.getElementById('image').src = '/uploads/' + vabene[0];
+            document.getElementById('image1').src = '/uploads/' + vabene[1];
+            document.getElementById('image2').src = '/uploads/' + vabene[2];
+            document.getElementById('image3').src = '/uploads/' + vabene[3];
+            document.getElementById('image4').src = '/uploads/' + vabene[4];
+            alert("Max files loading = 5");
+        };
+    };
+
+
+    /* getFile();
     async function getFile() {
         const res = await fetch('/filename');
         const risposta = res.json();
@@ -33,7 +81,7 @@ function verify() {
                 console.log(data[ij]);
             };
         })
-    };
+    }; */
 
     //console.log("array.page", page);
     //console.log('filedata', data);

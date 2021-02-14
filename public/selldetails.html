@@ -20,18 +20,9 @@
                 <li class="nav-item">
                     <a class="nav-link" href="index.html">Home <span class="sr-only">(current)</span></a>
                 </li>
-                <!-- <li class="nav-item">
-                    <a class="nav-link" href="login.html">Login</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="register.html">Register</a>
-                </li> -->
                 <li class="nav-item">
                     <a class="nav-link" href="buy.html">Buy from Marketplace</a>
                 </li>
-                <!-- <li class="nav-item">
-                    <a class="nav-link" href="sell.html">Sell the Equipment</a>
-                </li> -->
                 <li class="nav-item">
                     <a class="nav-link" href="contacts.html">Contacts</a>
                 </li>
@@ -41,73 +32,100 @@
     </nav>
     <br>
     <br>
-    <form style="padding-left:15px;padding-top:20px;width:80%">
+    <form style="padding-left:15px;padding-top:20px;width:70%">
+        <p style="color: red; text-align: right;">* Mandatory fields</p>
         <div class="form-row">
             <div class="form-group col-md-6">
-                <label for="inputEmail4">Email</label>
-                <input type="email" class="form-control" id="inputEmail4">
+                <label for="first_name">First Name <span style="color: red;">*</span></label>
+                <input type="text" class="form-control" id="first_name" required>
             </div>
             <div class="form-group col-md-6">
-                <label for="inputPassword4">Password</label>
-                <input type="password" class="form-control" id="inputPassword4">
+                <label for="last_name">Last Name <span style="color: red;">*</span></label>
+                <input type="text" class="form-control" id="last_name" required>
             </div>
         </div>
         <div class="form-group">
-            <label for="inputAddress">Address</label>
-            <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
-        </div>
-        <div class="form-group">
-            <label for="inputAddress2">Address 2</label>
-            <input type="text" class="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor">
+            <label for="email">Email <span style="color: red;">*</span></label>
+            <input type="email" class="form-control" id="email" required>
         </div>
         <div class="form-row">
             <div class="form-group col-md-6">
-                <label for="inputCity">City</label>
-                <input type="text" class="form-control" id="inputCity">
+                <label for="company">Company</label>
+                <input type="text" class="form-control" id="company">
             </div>
+            <div class="form-group col-md-6">
+                <label for="role">Job Title </label>
+                <input type="text" class="form-control" id="role">
+            </div>
+        </div>
+        <br>
+        <p>Equipment details</p>
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="oem">Manufacturer / OEM <span style="color: red;">*</span></label>
+                <input type="text" class="form-control" id="oem" required>
+            </div>
+            <div class="form-group col-md-6">
+                <label for="model">Model </label>
+                <input type="text" class="form-control" id="model">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="details">Description: process, configuration, # of chambers, hw, wafer size etc. </label>
+            <textarea class="form-control" id="details" style="height: 150px"></textarea>
+        </div>
+        <div class=" form-row ">
+            <div class="form-group col-md-4 ">
+                <label for="price">Asked price USD (optional)</label>
+                <input type="text " class="form-control " id="price">
+            </div>
+            <div class="form-group col-md-4 ">
+                <label for="location">Location </label>
+                <input type="text " class="form-control" id="location">
+            </div>
+            <div class="form-group col-md-4 ">
+                <label for="size">Wafer Size </label>
+                <input type="text " class="form-control" id="size">
+            </div>
+        </div>
+        <div class=" form-row ">
             <div class="form-group col-md-4">
-                <label for="inputState">State</label>
-                <select id="inputState" class="form-control">
-              <option selected>Choose...</option>
-              <option>...</option>
-            </select>
+                <label for="vintage">Vintage </label>
+                <input type="number" class="form-control " id="vintage">
             </div>
-            <div class="form-group col-md-2">
-                <label for="inputZip">Zip</label>
-                <input type="text" class="form-control" id="inputZip">
+            <div class="form-group col-md-4 ">
+                <label for="sn">Serial Number</label>
+                <input type="text " class="form-control " id="sn">
             </div>
-        </div>
-        <div class="form-group">
-            <div class="form-check">
-                <input class="form-check-input" type="checkbox" id="gridCheck">
-                <label class="form-check-label" for="gridCheck">
-              Check me out
-            </label>
+            <div class="form-group col-md-4 ">
+                <label for="condition">Conditions </label>
+                <input type="text" class="form-control" id="condition">
             </div>
         </div>
-        <button type="submit" class="btn btn-primary">Sign in</button>
-        <br><br><br>
-        <form action="/upload" method="POST" enctype="multipart/form-data">
-            <div class="file-field input-field">
-                <div class="btn grey">
-                    <span>File</span>
-                    <input name="myImage" type="file" id="filename" multiple>
+        <div class="container">
+            <h5>File Upload</h5>
+            <form action="/upload" method="POST" enctype="multipart/form-data">
+                <div class="file-field input-field">
+                    <input name="myImage" type="file" class="btn btn-secondary">
                 </div>
-                <div class="file-path-wrapper">
-                    <input id="upload" disabled class="file-path validate" type="text" placeholder="Upload your file (max 5)">
+                <br>
+                <div class="row " style="padding-left: 15px; ">
+                    <button type="submit" class="btn btn-primary" style="width:110px ">Upload file</button>
+                    <input type="button" class="btn btn-success" value="Send" style="position: absolute; left: 180px; width:110px" onclick="verify()">
                 </div>
-            </div>
+            </form>
             <br>
-            <div class="row" style="display: inline;">
-                <button id="submit" type="submit" class="btn">Submit</button>
-            </div>
-        </form>
+            <img id="image " class="responsive-img " style="max-width: 3cm;max-height: 3cm; ">
+            <img id="image1 " class="responsive-img " style="max-width: 3cm;max-height: 3cm; ">
+            <img id="image2 " class="responsive-img " style="max-width: 3cm;max-height: 3cm; ">
+            <img id="image3 " class="responsive-img " style="max-width: 3cm;max-height: 3cm; ">
+            <img id="image4 " class="responsive-img " style="max-width: 3cm;max-height: 3cm; ">
+        </div>
     </form>
-
-    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-    <script src="selldetails.js"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js " integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n " crossorigin="anonymous "></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js " integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo " crossorigin="anonymous "></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js " integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6 " crossorigin="anonymous "></script>
+    <script src="selldetails.js "></script>
 
 </body>
 
