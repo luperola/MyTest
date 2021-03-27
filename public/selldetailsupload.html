@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <title>Send data</title>
+</head>
+
+<body>
+    <!-- nav area -->
+    <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+            <!-- <a class="navbar-brand" href="#">Hidden brand</a> -->
+            <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link" href="index1.html">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="buy.html">Buy from Marketplace</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="contacts.html">Contacts</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <!-- end nav area -->
+    <br>
+    <br>
+    <!-- Your data table -->
+    <form style="padding-top:20px;width:50%; position: absolute; left: 30%;" id='table'>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Your data</th>
+                </tr>
+            </thead>
+            <tbody style='line-height: 6px;'>
+                <tr>
+                    <th scope="row">Name</th>
+                    <td id='namet'></td>
+                </tr>
+                <tr>
+                    <th scope="row">Email</th>
+                    <td id='emailt'></td>
+                </tr>
+                <tr>
+                    <th scope="row">Company</th>
+                    <td id='companyt'></td>
+                </tr>
+                <tr>
+                    <th scope="row">Job Title</th>
+                    <td id="rolet"></td>
+                </tr>
+                <tr>
+                    <th scope="row">Manufacturer / OEM</th>
+                    <td id="oemt"></td>
+                </tr>
+                <tr>
+                    <th scope="row">Model</th>
+                    <td id="modelt"></td>
+                </tr>
+                <tr>
+                    <th scope="row">Description</th>
+                    <td id="detailst"></td>
+                </tr>
+                <tr>
+                    <th scope="row">Price USD</th>
+                    <td id="pricet"></td>
+                </tr>
+                <tr>
+                    <th scope="row">Location</th>
+                    <td id="locationt"></td>
+                </tr>
+                <tr>
+                    <th scope="row">Wafer Size</th>
+                    <td id="sizet"></td>
+                </tr>
+                <tr>
+                    <th scope="row">Year of manufacturing</th>
+                    <td id="vintaget"></td>
+                </tr>
+                <tr>
+                    <th scope="row">Serial Number</th>
+                    <td id="snt"></td>
+                </tr>
+                <tr>
+                    <th scope="row">Conditions</th>
+                    <td id="conditiont"></td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="form-group col-md-3">
+            <input type="button" id="btnSend" class="btn btn-success" value="Post your data & images" style="width:300px;" onclick="postWebUpload()">
+        </div>
+        <!-- end of data table -->
+    </form>
+
+    <!-- Button trigger modal SELLUPLOAD-->
+    <button type="button" id="btnSellUpload" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalSellUpload" style="display: none;"></button>
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModalSellUpload" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel1">We'd be glad to offer our collaboration</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+                </div>
+                <div class="modal-body" style='padding-left: 3px;'>
+                    <ul style="list-style-type:circle;">
+                        <li>Our Company has experts that know to whom to get in touch with for quickly selling your equipment</li>
+                        <li>We search for you the best offer</li>
+                        <li>We deal with buyer for all details/configurations</li>
+                        <li>Final decision is only yours</li>
+                        <li>Your Company pays us a fee of 3.5% on equipment value <span style='text-decoration: underline;'>if the deal is succesfull</span></li>
+                        <li>No exclusivity</li>
+                    </ul>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="Preview()">No, not interested. Post the equipment sale request for free</button>
+                    <button type="button" class="btn btn-primary" onclick="fileDownload()">I'm interested to have your collaboration</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end Modal -->
+    <!-- Button trigger modal -->
+    <button type="button" id="btnDownload" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalD" style="display: none;">
+    </button>
+
+    <!-- Modal Download agreement-->
+    <div class="modal fade" id="exampleModalD" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Download, sign and send</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body" style='padding-left: 3px;'>
+                    <ul>
+                        <li>Your request has been taken in charge by our Company</li>
+                        <li>We'll reply you in few days with a preliminary market benchmark</li>
+                        <li><a href="./home.pdf">Please download</a>, fill, sign the agreement and send it to abc@example.com </li>
+                    </ul>
+                </div>
+                <div class="modal-footer">
+                    <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">OK. Download and sign</button> -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end Modal -->
+
+    <!-- Button trigger modal POST -->
+    <button type="button" id="btnPost" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalPost" style="display: none;"></button>
+
+    <!-- Modal POST-->
+    <div class="modal fade" id="exampleModalPost" tabindex="-1" role="dialog" aria-labelledby="exampleModalPost" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel1">Your equipment for sale has been posted </h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+                </div>
+                <div class="modal-body">
+                    <ul>
+                        <li>Your equipment is in the database already</li>
+                        <li>By next web data sync your webpage is ready</li>
+                    </ul>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" onclick='postData()'>That's fine, thanks</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end Modal POST -->
+    <!-- Upload code and image show -->
+    <div class="container" style="position: absolute; padding-top: 20px; padding-left: 20px;">
+        <h5>File Upload</h5>
+        <form action="/upload" method="POST" enctype="multipart/form-data">
+            <div class="file-field input-field">
+                <input name="myImage" type="file" class="btn btn-primary">
+            </div>
+            <br>
+            <div class='row' style="padding-left: 2.5%;">
+                <button type="submit" class="btn btn-primary" style="width:110px;">Submit</button>
+                <!-- <input type="button" id="btnSend" onclick="send()" class="btn btn-success" value="Send" style="width:110px;margin-left: 5%;"> -->
+            </div>
+        </form>
+        <br>
+        <div class='row'>
+            <img id="image" class="responsive-img" style="max-width: 3cm;max-height: 3cm;">
+            <img id="image1" class="responsive-img" style="max-width: 3cm;max-height: 3cm;">
+        </div>
+        <div class='row'>
+            <img id="image2" class="responsive-img" style="max-width: 3cm;max-height: 3cm;">
+            <img id="image3" class="responsive-img" style="max-width: 3cm;max-height: 3cm;">
+        </div>
+        <div class='row'>
+            <img id="image4" class="responsive-img" style="max-width: 3cm;max-height: 3cm;">
+        </div>
+    </div>
+    <!-- end upload -->
+
+    <Script>
+        function clickSale() {
+            document.getElementById('btnSell').click();
+        };
+
+        function fileDownload() {
+            document.getElementById('btnDownload').click();
+        };
+    </Script>
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js " integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n " crossorigin="anonymous "></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js " integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo " crossorigin="anonymous "></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js " integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6 " crossorigin="anonymous "></script>
+    <script src="selldetailsupload.js"></script>
+</body>
+
+</html>

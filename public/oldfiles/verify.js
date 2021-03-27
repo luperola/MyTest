@@ -157,7 +157,7 @@ function addButton() {
         };
         const resp_verify = await fetch('/verify', optionsVerify);
         const json_verify = await resp_verify.json();
-        console.log(json_verify);
+        //console.log(json_verify);
         sessionStorage.setItem('webCreation', JSON.stringify(json_verify));
         if (typeof(json_verify) === 'object') {
             document.location.href = 'writetext.html';

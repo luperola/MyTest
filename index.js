@@ -1,15 +1,17 @@
 const express = require('express');
 const fetch = require('node-fetch');
 const Datastore = require('nedb');
-const fs = require('fs-extra');
+const fs = require('fs');
+const fsExtra = require('fs-extra');
 const app = express();
 const send = require('gmail-send');
 var bodyParser = require('body-parser');
 require('dotenv').config();
 const multer = require('multer');
+const path = require("path");
 var ncp = require('ncp').ncp;
 ncp.limit = 0;
-const path = require("path");
+
 
 const port = process.env.PORT || 3000;
 app.listen(port, () => { console.log(`listening server at ${port}`); });
@@ -23,6 +25,8 @@ database.loadDatabase();
 const dbProducts = new Datastore('dbProducts.db');
 dbProducts.loadDatabase();
 
+const dbBuy = new Datastore('dbBuy.db');
+dbBuy.loadDatabase();
 // Parse csv and fulfill database
 
 // Attenzione! l'item 'equipment' deve essere tutto minuscolo, altrimenti db.find non lo trova
@@ -54,15 +58,10 @@ fs.createReadStream(inputFile).pipe(parser); */
 
 // end of parsing
 
-// npm to surf on webpages
-//const axios = require('axios');
-//const cheerio = require('cheerio');
-//end
-
 // Prende dati da login e da login.js e controlla se sono già nel database
 
 app.post('/validation', (request, response) => {
-    console.log("Checking if login is OK!");
+    //console.log("Checking if login is OK!");
     const data = request.body;
     const email = data.Email;
     const pw = data.Password;
@@ -79,11 +78,10 @@ app.post('/validation', (request, response) => {
 });
 
 app.post('/register', (request, response) => {
-    console.log("I got the login & the password");
-    console.log(request.body);
+    //console.log("I got the login & the password");
+    //console.log(request.body);
     const data = request.body;
     database.insert(data);
-    //response.json(data);
     response.json({
         my_email: data.Email,
         my_password: data.Password1
@@ -91,7 +89,7 @@ app.post('/register', (request, response) => {
 });
 
 app.post('/search', (request, response) => {
-    console.log("Checking if Search is OK!");
+    //console.log("Checking if Search is OK!");
     const data_search = request.body;
     const category = data_search.webString;
     const categorySearch = category.split(" ") || category.split("-");
@@ -217,25 +215,28 @@ app.post('/ebaysearch', (request, res) => {
     };
 });
 
+var fileoriginale;
 // Set The Storage Engine
 const storage = multer.diskStorage({
     destination: './public/uploads/',
     filename: function(req, file, cb) {
-        var a = new Date();
-        var b = new Date();
-        var c = new Date();
-        var d = new Date();
-        var e = new Date();
-        var f = new Date();
-        a = a.getMonth();
-        b = b.getDay();
-        c = c.getHours();
-        d = d.getMinutes();
-        e = e.getSeconds();
-        f = f.getMilliseconds()
-        var dataDelFile = "M" + a + "D" + b + "H" + c + "MN" + d + "S" + e + "MS" + f
-        cb(null, file.fieldname + '-' + dataDelFile + path.extname(file.originalname));
-        //Date.now()
+        /*  var a = new Date();
+         var b = new Date();
+         var c = new Date();
+         var d = new Date();
+         var e = new Date();
+         var f = new Date();
+         a = a.getMonth();
+         b = b.getDay();
+         c = c.getHours();
+         d = d.getMinutes();
+         e = e.getSeconds();
+         f = f.getMilliseconds()
+             //var dataDelFile = "M" + a + "D" + b + "H" + c + "MN" + d + "S" + e + "MS" + f
+             //cb(null, file.fieldname + '-' + dataDelFile + path.extname(file.originalname)); */
+        //console.log('nome del file', file.originalname);
+        cb(null, file.originalname);
+        fileoriginale = file.originalname
     }
 });
 
@@ -263,82 +264,70 @@ const upload = multer({
         cb('Error: Images Only!');
     }
 } */
+
 app.post('/upload', (req, res) => {
     upload(req, res, (err) => {
         if (err) {
-            /* res.render('index', {
-              msg: err
-            }); */
             console.log(err);
-
         } else {
             if (req.file == undefined) {
-                /* res.render('index', {
-                  msg: 'Error: No File Selected!'
-                }); */
-                res.redirect("index.html");
+                res.redirect("selldetailsupload.html");
             } else {
                 //console.log("file =", req.file);
-                //res.send(req.file);
-                res.redirect("index.html");
+                res.redirect("selldetailsupload.html");
                 res.end();
                 return
             }
         }
     });
 });
+
 // Send uploaded file names to client
 app.get('/filename', (req, resp) => {
     const testFolder = './public/uploads';
     fs.readdir(testFolder, (err, files) => {
         files.forEach(file => {});
-        console.log("files=", files);
+        //console.log("files=", files);
         resp.json(files);
     });
 });
-// post for publishing the on sale and make its website
-app.post('/verify', (request, response) => {
-    const data_verify = request.body;
-    // record the json file with data 
-    const giorno = Date.now()
-    var nextdir = data_verify.verified[5] + data_verify.verified[6] + giorno + '.json';
-    nextdir = './public/posted/' + nextdir;
 
-    // stringify JSON Object
-    var newHtml_data = JSON.stringify(data_verify);
-    console.log(newHtml_data);
+app.post('/buywus', (request, response) => {
+    //console.log(request.body);
+    dbBuy.insert(request.body);
+    response.json(request.body);
+});
 
-    fs.writeFile(nextdir, newHtml_data, 'utf8', function(err) {
-        if (err) {
-            console.log("An error occured while writing JSON Object to File.");
-            return console.log(err);
-        }
-        console.log("JSON file has been saved.");
-    });
+//copy files
+//const test = 'brandnew';
+//fs.createReadStream('public/test.html').pipe(fs.createWriteStream('public/' + `${test}` + '.html'));
 
-    response.json({ data_verify, nextdir });
 
-    // move files from /public/upload to Images and to /public/img
-    var thePath = "./";
-    var folder = "public/uploads";
-    var newFolder = "Images";
-
-    ncp(path.join(thePath, folder), path.join(thePath, newFolder), async function(err) {
-        if (err) {
-            return console.error('errore in copy folder', err);
-        }
-
-    });
+// move files from 'upload' to datapost.OEM and empty upload folder
+app.post('/postfile', (request, response) => {
+    const datapost = request.body;
+    //console.log('request.body', datapost);
     var thePath1 = "./";
     var folder1 = "public/uploads";
-    var newFolder1 = "public/img";
+    var newFolder1 = datapost.OEM + datapost.Model;
+
     ncp(path.join(thePath1, folder1), path.join(thePath1, newFolder1), async function(err) {
         if (err) {
             return console.error('errore in copy folder', err);
         }
-        fs.emptyDir('./public/uploads');
+        //fs.emptyDir('./public/uploads');
+        fsExtra.emptyDirSync('./public/uploads');
     });
 
+    const dataToPost = {
+        website: 'index1.html',
+        equipment: datapost.OEM + ' ' + datapost.Model + 'cercami',
+        supplier: datapost.Email,
+        other_data: datapost.Name + ' ' + datapost.Description + ' ' + datapost.Conditions + ' ' + datapost.Pic1 + ' ' +
+            datapost.Pic1 + ' ' + datapost.Pic2 + ' ' + datapost.Pic3 + ' ' + datapost.Pic4 + ' ' + datapost.Pic5
+    };
+    dbProducts.insert(dataToPost);
+    response.json(dataToPost);
 });
 
 // Code for scraping websites with axios and cheerio

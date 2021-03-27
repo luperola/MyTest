@@ -73,7 +73,7 @@ if (data_forweb.data_verify.passData[4] != undefined) {
 function Confirm() {
     var r = confirm("Confirm to post the equipment?");
     if (r == true) {
-        document.location.href = 'index.html'
+        document.location.href = 'index1.html'
     } else {
         document.location.href = 'sell.html'
     }

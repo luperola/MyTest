@@ -4,11 +4,216 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Buy with us</title>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <title>Work with us page</title>
 </head>
 
 <body>
-    <h1>Option page</h1>
+    <!-- Button trigger modal -->
+    <button type="button" id="btnDownload" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" style="display: none;">
+</button>
+
+    <!-- Modal Download agreement-->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Download, sign and send</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+                </div>
+                <div class="modal-body" style='padding-left: 3px;'>
+                    <ul>
+                        <li>Your request has been taken in charge by our Company</li>
+                        <li>We'll reply you in few days with a preliminary market benchmark</li>
+                        <li><a href="./home.pdf">Please download</a>, fill, sign the agreement and <a href='mailto: abc@example.com'>send it to us</a> </li>
+                    </ul>
+                </div>
+                <div class="modal-footer">
+                    <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">OK. Download and sign</button> -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end Modal -->
+    <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+            <!-- <a class="navbar-brand" href="#">Hidden brand</a> -->
+            <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link" href="index1.html">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="buy.html">Buy from Marketplace</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="contacts.html">Contacts</a>
+                </li>
+            </ul>
+
+        </div>
+    </nav>
+    <br>
+    <br>
+    </div>
+    <form id='fillformbuy' style="padding-left:15px;padding-top:20px;width:70%">
+        <h5>Fill the form to let us know the equipment you are interested to buy</h5>
+        <p style="color: red; text-align: right;">* Mandatory fields</p>
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="first_name">First Name <span style="color: red;">*</span></label>
+                <input type="text" class="form-control" id="first_name" value="Luigi">
+            </div>
+            <div class="form-group col-md-6">
+                <label for="last_name">Last Name <span style="color: red;">*</span></label>
+                <input type="text" class="form-control" id="last_name" value="Pero, per" required>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="email">Email <span style="color: red;">*</span></label>
+            <input type="email" class="form-control" id="email" value="prova@example.com" required>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="company">Company</label>
+                <input type="text" class="form-control" id="company" value="Linde">
+            </div>
+            <div class="form-group col-md-6">
+                <label for="role">Job Title </label>
+                <input type="text" class="form-control" id="role" value="Acc Mgr">
+            </div>
+        </div>
+        <br>
+        <p>Equipment details <span style="font-style: italic;">(if you are searching for several equipment, send us a file<a href='mailto: abc@example.com'> clicking here</a>)</span></p>
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="oem">Manufacturer / OEM <span style="color: red;">*</span></label>
+                <input type="text" class="form-control" id="oem" value="Amat" required>
+            </div>
+            <div class="form-group col-md-6">
+                <label for="model">Model <span style="color: red;">*</span></label>
+                <input type="text" class="form-control" id="model" value="Centura 5500">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="details">Description: process, configuration, # of chambers, hw, wafer size etc. </label>
+            <textarea class="form-control" id="details" style="height: 150px">Typical Centura 550 configuration</textarea>
+        </div>
+        <div class="form-row">
+            <label for="price" style="margin-top: 8px; margin-right: 5px;">Asked price USD (optional)</label>
+            <input type="text" class="form-control" id="priceFrom" onchange="separateNumber(this.value)" style='width: 100px; margin-right: 5px;' placeholder="From">
+            <input type="text" class="form-control" id="priceTo" onchange="separateNumberTo(this.value)" style='width: 100px;' placeholder="To">
+            <label for="size" style="margin-top: 8px; margin-left:20px; margin-right: 5px;"> Wafer Size </label>
+            <input type="text" class="form-control" id="size" value='8"' style='width:110px'>
+        </div>
+        <div class='form-row '>
+            <label for="condition " style="margin-top: 8px; margin-right: 5px;">Conditions </label>
+            <input type="text" class="form-control " id="condition" value="as-is-where-is" style='width: 200px;'>
+        </div>
+        <br>
+        <div class="form-group col-md-3">
+            <input type="button" id="btnSend" class="btn btn-success" value="Send" style="width:110px" onclick="verify()">
+        </div>
+    </form>
+    <div>
+        <!-- data table -->
+        <form style="padding-top:20px;width:50%; position: absolute; padding-left:15px; display:none" id='tablebuy'>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col"></th>
+                        <th scope="col">Equipment to buy</th>
+                    </tr>
+                </thead>
+                <tbody style='line-height: 6px;'>
+                    <tr>
+                        <th scope="row">Name</th>
+                        <td id='nameb'></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Email</th>
+                        <td id='emailb'></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Company</th>
+                        <td id='companyb'></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Job Title</th>
+                        <td id="roleb"></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Manufacturer / OEM</th>
+                        <td id="oemb"></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Model</th>
+                        <td id="modelb"></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Description</th>
+                        <td id="detailsb"></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Price USD</th>
+                        <td id="priceb"></td>
+                    </tr>
+                    <!-- <tr>
+                        <th scope="row">Location</th>
+                        <td id="locationb"></td>
+                    </tr> -->
+                    <tr>
+                        <th scope="row">Wafer Size</th>
+                        <td id="sizeb"></td>
+                    </tr>
+                    <!-- <tr>
+                        <th scope="row">Year of manufacturing</th>
+                        <td id="vintageb"></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Serial Number</th>
+                        <td id="snb"></td>
+                    </tr> -->
+                    <tr>
+                        <th scope="row">Conditions</th>
+                        <td id="conditionb"></td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="form-group col-md-3">
+                <input type="button" id="btnSend" class="btn btn-success" value="Post your request" style="width:300px;" onclick="postWebUpload()">
+            </div>
+            <!-- end of data table -->
+        </form>
+
+    </div>
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js " integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n " crossorigin="anonymous "></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js " integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo " crossorigin="anonymous "></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js " integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6 " crossorigin="anonymous "></script>
+    <script>
+        // mette la virgola alle migliaia
+        function separateNumber() {
+            givenNumber = document.getElementById("priceFrom").value;
+            nfObject = new Intl.NumberFormat('en-US');
+            output = nfObject.format(givenNumber);
+            output = '$ ' + output.toString();
+            document.getElementById("priceFrom").value = output;
+        };
+
+        function separateNumberTo(params) {
+            givenNumberTo = document.getElementById("priceTo").value;
+            nfToObject = new Intl.NumberFormat('en-US');
+            outputTo = nfToObject.format(givenNumberTo);
+            outputTo = '$ ' + outputTo.toString();
+            document.getElementById("priceTo").value = outputTo;
+        };
+    </script>
+    <script src="buywithus.js"></script>
 </body>
 
 </html>

@@ -11,14 +11,14 @@
 
 <body>
     <!-- Button trigger modal SELL-->
-    <button type="button" id="btnSell" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalSell" style="display: none;"></button>
-
+    <button type="button" id="btnSell" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalSell" style="display: none;">
+      </button>
     <!-- Modal -->
     <div class="modal fade" id="exampleModalSell" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel1">We'd be glad to offer our collaboration</h5>
+                    <h5 class="modal-title" id="exampleModalLabel1">We'd be glad to offer our collaboration ?</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
@@ -27,7 +27,7 @@
                     <ul style="list-style-type:circle;">
                         <li>Our Company has experts that know to whom to get in touch with for quickly selling your equipment</li>
                         <li>We search for you the best offer</li>
-                        <li>We deal with buyer for all details/configurations</li>
+                        <li>We deal with buyer for all details</li>
                         <li>Final decision is only yours</li>
                         <li>Your Company pays us a fee of 3.5% on equipment value <span style='text-decoration: underline;'>if the deal is succesfull</span></li>
                         <li>No exclusivity</li>
@@ -35,64 +35,12 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="verify()">No, not interested. Post the equipment sale request for free</button>
-                    <button type="button" class="btn btn-primary" onclick="fileDownload()">I'm interested to have your collaboration</button>
+                    <button type="button" class="btn btn-primary" onclick="document.location.href='login.html'">I'm interested to have your collaboration</button>
                 </div>
             </div>
         </div>
     </div>
     <!-- end Modal -->
-
-    <!-- Button trigger modal -->
-    <button type="button" id="btnDownload" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalD" style="display: none;">
-    </button>
-
-    <!-- Modal Download agreement-->
-    <div class="modal fade" id="exampleModalD" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Download, sign and send</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
-                </div>
-                <div class="modal-body" style='padding-left: 3px;'>
-                    <ul>
-                        <li>Your request has been taken in charge by our Company</li>
-                        <li>We'll reply you in few days with a preliminary market benchmark</li>
-                        <li><a href="./home.pdf">Please download</a>, fill, sign the agreement and send it to abc@example.com </li>
-                    </ul>
-                </div>
-                <div class="modal-footer">
-                    <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">OK. Download and sign</button> -->
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- end Modal -->
-
-    <!-- Button trigger modal POST -->
-    <button type="button" id="btnPost" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalPost" style="display: none;"></button>
-
-    <!-- Modal POST-->
-    <div class="modal fade" id="exampleModalPost" tabindex="-1" role="dialog" aria-labelledby="exampleModalPost" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel1">Your equipment for sale has been posted </h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-                </div>
-                <div class="modal-body">See Web Preview or terminate the process</div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="">See Preview</button>
-                    <button type="button" class="btn btn-primary" onclick="document.location.href='index1.html'">That's fine, thanks</button>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- end Modal POST -->
     <!-- nav area -->
     <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
@@ -119,7 +67,7 @@
     <br>
     </div>
     <!-- fill-the-form area -->
-    <form style="padding-left:15px;padding-top:20px;width:70%; display: block;" id='fill'>
+    <form style="padding-left:15px;padding-top:20px;width:70%">
         <p style="color: red; text-align: right;">* Mandatory fields</p>
         <div class="form-row">
             <div class="form-group col-md-6">
@@ -192,7 +140,7 @@
     </form>
     <!-- End fill-the-form area -->
     <!-- options on file upload -->
-    <form style="padding-left:15px;padding-top:20px;width:70%; display:block" id='fileUpload'>
+    <form style="padding-left:15px;padding-top:20px;width:70%">
         <h5>File Upload</h5>
         <div class=" form-row ">
             <div class="form-group col-md-3">
@@ -205,87 +153,20 @@
             </div>
             <div class="form-group col-md-3">
                 <div class="form-check">
-                    <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2" onclick="clickSale()">
+                    <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2" onclick="Option2()">
                     <label class="form-check-label" for="exampleRadios2">
               I don't want to upload any file
             </label>
                 </div>
             </div>
+            <div class="form-group col-md-3">
+                <input type="button" id="btnSend" class="btn btn-success" value="Send" style="width:110px;display: none;" onclick="clickSale()">
+            </div>
         </div>
     </form>
     <!-- end option area -->
 
-    <!-- Your data table -->
-    <form style="padding-top:20px;width:50%; position: absolute; left: 30%; display:none" id='table'>
-        <table class="table">
-            <thead>
-                <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Your data</th>
-                </tr>
-            </thead>
-            <tbody style='line-height: 6px;'>
-                <tr>
-                    <th scope="row">Name</th>
-                    <td id='namet'></td>
-                </tr>
-                <tr>
-                    <th scope="row">Email</th>
-                    <td id='emailt'></td>
-                </tr>
-                <tr>
-                    <th scope="row">Company</th>
-                    <td id='companyt'></td>
-                </tr>
-                <tr>
-                    <th scope="row">Job Title</th>
-                    <td id="rolet"></td>
-                </tr>
-                <tr>
-                    <th scope="row">Manufacturer / OEM</th>
-                    <td id="oemt"></td>
-                </tr>
-                <tr>
-                    <th scope="row">Model</th>
-                    <td id="modelt"></td>
-                </tr>
-                <tr>
-                    <th scope="row">Description</th>
-                    <td id="detailst"></td>
-                </tr>
-                <tr>
-                    <th scope="row">Price USD</th>
-                    <td id="pricet"></td>
-                </tr>
-                <tr>
-                    <th scope="row">Location</th>
-                    <td id="locationt"></td>
-                </tr>
-                <tr>
-                    <th scope="row">Wafer Size</th>
-                    <td id="sizet"></td>
-                </tr>
-                <tr>
-                    <th scope="row">Year of manufacturing</th>
-                    <td id="vintaget"></td>
-                </tr>
-                <tr>
-                    <th scope="row">Serial Number</th>
-                    <td id="snt"></td>
-                </tr>
-                <tr>
-                    <th scope="row">Conditions</th>
-                    <td id="conditiont"></td>
-                </tr>
-            </tbody>
-        </table>
 
-        <div class="form-group col-md-3">
-            <input type="button" id="btnSend" class="btn btn-success" value="Post your data in the platform" style="width:300px;display:none;" onclick="postWeb()">
-        </div>
-        <!-- end of data table -->
-    </form>
-    <!-- end of Data table -->
     <Script>
         function clickSale() {
             document.getElementById('btnSell').click();

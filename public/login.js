@@ -13,7 +13,7 @@ let json = [];
 async function getEmail() {
     const Email = document.getElementById("Email").value;
     const Password = document.getElementById("Password").value;
-    console.log(Email, "--", Password);
+    //console.log(Email, "--", Password);
     data = { Email, Password };
     //console.log(data);
 
@@ -26,7 +26,7 @@ async function getEmail() {
     };
     const response = await fetch('/validation', options);
     const json = await response.json();
-    console.log("dati dal post da login", json);
+    //console.log("dati dal post da login", json);
     //console.log("1° elemento di array", json[0]);
     //console.log("test", JSON.stringify(json));
     if (json[0] != undefined) {
@@ -35,8 +35,8 @@ async function getEmail() {
             const test = JSON.stringify(json[0]);
             String[0] = test.split(",");
             if (test.includes(`${data.Email}`) && test.includes(`${data.Password}`)) {
-                console.log("Evviva!!!!", data.Email, data.Password);
-                //document.location = "index.html";
+                //console.log("Evviva!!!!", data.Email, data.Password);
+                //document.location = "index1.html";
             } else { alert("Something went wrong in login!, ID or password are wrong") };
         }
     } else {

@@ -1,8 +1,9 @@
-function verify() {
-    /* document.getElementById('filename').disabled = false;
-    document.getElementById('upload').disabled = false;
-    document.getElementById('submit').disabled = false; */
-    let page = [];
+var pageNew;
+
+async function verify() {
+    document.getElementById('fill').style.display = 'none'
+    document.getElementById('table').style.display = 'block';
+    document.getElementById('fileUpload').style.display = 'none';
     const verifyName = document.getElementById("first_name").value;
     const verifyLastName = document.getElementById("last_name").value;
     const verifyEmail = document.getElementById("email").value;
@@ -17,74 +18,57 @@ function verify() {
     const verifyVintage = document.getElementById("vintage").value;
     const verifySN = document.getElementById("sn").value;
     const verifyCondition = document.getElementById("condition").value;
-    //const verifyUpload = document.getElementById("upload").value;
-    page.push(verifyName, verifyLastName, verifyEmail, verifyCompany, verifyRole, verifyOEM, verifyModel,
-        verifyDetails, verifyPrice, verifyLocation, verifySize, verifyVintage, verifySN, verifyCondition)
 
-    for (let index = 0; index < page.length; index++) {
-        const element = page[index];
-        console.log("list", index, " ", page[index]);
+    const pageSell = {
+        Name: verifyName + " " + verifyLastName,
+        Email: document.getElementById("email").value,
+        Company: verifyCompany,
+        Role: verifyRole,
+        OEM: verifyOEM,
+        Model: verifyModel,
+        Description: verifyDetails,
+        Price: '$ ' + verifyPrice,
+        Location: verifyLocation,
+        Size: verifySize,
+        Vintage: verifyVintage,
+        SN: verifySN,
+        Conditions: verifyCondition
     };
+    document.getElementById("namet").innerHTML = pageSell.Name;
+    document.getElementById("emailt").innerHTML = pageSell.Email;
+    document.getElementById("companyt").innerText = pageSell.Company;
+    document.getElementById("rolet").innerText = pageSell.Role;
+    document.getElementById("oemt").innerText = pageSell.OEM;
+    document.getElementById("modelt").innerText = pageSell.Model;
+    document.getElementById("detailst").innerText = pageSell.Description;
+    document.getElementById("pricet").innerText = pageSell.Price;
+    document.getElementById("locationt").innerText = pageSell.Location;
+    document.getElementById("sizet").innerText = pageSell.Size;
+    document.getElementById("vintaget").innerText = pageSell.Vintage;
+    document.getElementById("snt").innerText = pageSell.SN;
+    document.getElementById("conditiont").innerText = pageSell.Conditions;
+    document.getElementById('table').style.left = '20px';
+    document.getElementById('btnSend').style.display = 'block';
+    pageNew = pageSell;
+};
 
-    Catch();
-    async function Catch() {
-        const prendifile = await fetch('/filename');
-        var vabene = await prendifile.json();
-        console.log("response", vabene);
-        if (vabene.length === 1) {
-            document.getElementById('image').src = '/uploads/' + vabene[0];
-        };
-        if (vabene.length === 2) {
-            document.getElementById('image').src = '/uploads/' + vabene[0];
-            document.getElementById('image1').src = '/uploads/' + vabene[1];
-        };
+function Option1() {
+    verify();
+    sessionStorage.setItem("verified", JSON.stringify(pageNew));
+    document.location = "selldetailsupload.html";
 
-        if (vabene.length === 3) {
-            document.getElementById('image').src = '/uploads/' + vabene[0];
-            document.getElementById('image1').src = '/uploads/' + vabene[1];
-            document.getElementById('image2').src = '/uploads/' + vabene[2];
-        };
-        if (vabene.length === 4) {
-            document.getElementById('image').src = '/uploads/' + vabene[0];
-            document.getElementById('image1').src = '/uploads/' + vabene[1];
-            document.getElementById('image2').src = '/uploads/' + vabene[2];
-            document.getElementById('image3').src = '/uploads/' + vabene[3];
-        };
-        if (vabene.length === 5) {
-            document.getElementById('image').src = '/uploads/' + vabene[0];
-            document.getElementById('image1').src = '/uploads/' + vabene[1];
-            document.getElementById('image2').src = '/uploads/' + vabene[2];
-            document.getElementById('image3').src = '/uploads/' + vabene[3];
-            document.getElementById('image4').src = '/uploads/' + vabene[4];
-        };
-        if (vabene.length > 5) {
-            document.getElementById('image').src = '/uploads/' + vabene[0];
-            document.getElementById('image1').src = '/uploads/' + vabene[1];
-            document.getElementById('image2').src = '/uploads/' + vabene[2];
-            document.getElementById('image3').src = '/uploads/' + vabene[3];
-            document.getElementById('image4').src = '/uploads/' + vabene[4];
-            alert("Max files loading = 5");
-        };
-    };
+};
 
+function Option2() {
+    document.getElementById("btnSend").style.display = "block";
+};
 
-    /* getFile();
-    async function getFile() {
-        const res = await fetch('/filename');
-        const risposta = res.json();
-        var data = ''
-        Promise.resolve(risposta).then(value => {
-            console.log('value:', value[0], value[1])
-            data = value;
-            console.log('array', data);
-            for (let ij = 0; ij < data.length; ij++) {
-                console.log(data[ij]);
-            };
-        })
-    }; */
+function postWeb() {
+    document.getElementById('table').style.display = 'none';
+    document.getElementById('btnPost').click();
+    //console.log('pagePost', pageNew.Name);
+};
 
-    //console.log("array.page", page);
-    //console.log('filedata', data);
-    sessionStorage.setItem("verified", page);
-    //sessionStorage.setItem('filenames', data);
+function fileDownload() {
+    document.getElementById('btnDownload').click();
 };

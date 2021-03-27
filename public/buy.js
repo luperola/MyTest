@@ -1,12 +1,13 @@
-var input = document.getElementById("search-category");
+/* var input = document.getElementById("search-category");
 input.addEventListener("keyup", function(event) {
     if (event.keyCode === 13) {
         event.preventDefault();
         document.getElementById("btnSearch").click();
     }
-});
+}); */
 
 async function SearchNew() {
+    document.getElementById('title').style.display = 'none';
     count += 1;
     var webString = document.getElementById("search-category").value
     webString = webString.toLowerCase();
@@ -39,7 +40,7 @@ async function SearchNew() {
     let sixthhrEbay = [];
 
     if (count === 1) {
-        // post index.js for search in dbProducts.db with first reasearch term
+        // post index.js for search in dbProducts.db with first research term
         const options = {
             method: "POST",
             headers: {
@@ -49,7 +50,7 @@ async function SearchNew() {
         };
         const resp = await fetch('/search', options);
         const json_web = await resp.json();
-        console.log("risposta dal server", json_web);
+        //console.log("risposta dal server", json_web);
 
         // post on ebay
         const options_ebay = {
@@ -61,7 +62,7 @@ async function SearchNew() {
         };
         const resp_ebay = await fetch('/ebaysearch', options_ebay);
         const json_ebay = await resp_ebay.json();
-        console.log("risposta da ebay", json_ebay);
+        //console.log("risposta da ebay", json_ebay);
         // end ebay Post 
 
         if (json_web.length === 0 & json_ebay.length === 0) {
@@ -78,9 +79,13 @@ async function SearchNew() {
             // Adding a paragraph to divID class
             paragraph[j] = document.createElement("P");
             paragraph[j].id = "textArea" + j.toString();
-            //var text = document.createTextNode(json_web[j].equipment.toUpperCase());
-            var text = document.createTextNode(json_web[j].equipment.toUpperCase() + "\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0" + "(" + json_web[j].supplier.toString().slice(8) + ")");
-            paragraph[j].appendChild(text);
+            if (json_web[j].supplier.includes('@')) {
+                var text = document.createTextNode(json_web[j].equipment.toUpperCase() + "\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0" + "(" + json_web[j].supplier.toString() + ")");
+                paragraph[j].appendChild(text);
+            } else {
+                var text = document.createTextNode(json_web[j].equipment.toUpperCase() + "\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0" + "(" + json_web[j].supplier.toString().slice(8) + ")");
+                paragraph[j].appendChild(text);
+            };
 
             // Adding horizontal tag
             hr[j] = document.createElement("hr");
