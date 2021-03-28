@@ -6,7 +6,6 @@
 \public\img
 *.jpg
 *.json
-\public\posted
 *.db
 *.docx
 *.csv
